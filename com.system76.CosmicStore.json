@@ -1,0 +1,64 @@
+{
+    "app-id": "com.system76.CosmicStore",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "49",
+    "sdk": "org.gnome.Sdk",
+    "command": "cosmic-store",
+    "finish-args": [
+        "--share=ipc",
+        "--share=network",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--env=LD_LIBRARY_PATH=/app/lib",
+        "--filesystem=host:ro",
+        "--filesystem=/var/lib/flatpak",
+        "--filesystem=xdg-data/flatpak",
+        "--filesystem=xdg-config/systemd:ro",
+        "--filesystem=/var/tmp",
+        "--filesystem=~/.var/app",
+        "--talk-name=org.freedesktop.Flatpak",
+        "--system-talk-name=org.freedesktop.Flatpak.SystemHelper",
+        "--talk-name=org.freedesktop.Accounts",
+        "--talk-name=org.freedesktop.Notifications",
+        "--talk-name=org.freedesktop.secrets",
+        "--talk-name=org.freedesktop.systemd1",
+        "--talk-name=org.freedesktop.PackageKit",
+        "--talk-name=org.freedesktop.fwupd"
+    ],
+    "modules": [
+        {
+            "name": "cosmic-store",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p /app/lib && cp *.so* /app/lib/",
+                "install -Dm755 cosmic-store /app/bin/cosmic-store",
+                "install -Dm644 com.system76.CosmicStore.desktop /app/share/applications/com.system76.CosmicStore.desktop",
+                "install -Dm644 com.system76.CosmicStore.metainfo.xml /app/share/metainfo/com.system76.CosmicStore.metainfo.xml",
+                "install -Dm644 com.system76.CosmicStore.svg /app/share/icons/hicolor/256x256/apps/com.system76.CosmicStore.svg"
+            ],
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "lib"
+                },
+                {
+                    "type": "file",
+                    "path": "target/release/cosmic-store"
+                },
+                {
+                    "type": "file",
+                    "path": "res/com.system76.CosmicStore.desktop"
+                },
+                {
+                    "type": "file", 
+                    "path": "res/com.system76.CosmicStore.metainfo.xml"
+                },
+                {
+                    "type": "file",
+                    "path": "res/icons/hicolor/256x256/apps/com.system76.CosmicStore.svg"
+                }
+            ]
+        }
+    ]
+}
