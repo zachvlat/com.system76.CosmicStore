@@ -15,17 +15,5 @@ git clone https://github.com/pop-os/cosmic-store
 <br>
 cd cosmic-store
 <br>
-cargo build --release
+chmod +x flatpak.sh
 <br>
-ldd target/release/cosmic-store | awk '{print $3}' | grep '^/' | \
-    grep -v 'libc\|libm\|libdl\|libpthread\|ld-linux\|libgcc\|libstdc\|libresolv' | \
-    xargs -I{} cp {} lib/
-<br>
-flatpak-builder --user --install-deps-from=flathub --force-clean build-dir com.system76.CosmicStore.json
-<br>
-flatpak build-export repo build-dir
-<br>
-flatpak build-bundle repo cosmic-store-new.flatpak com.system76.CosmicStore
-<br>
-
-* In order to show the application on the first just run build you have to copy the src/backend into the project. It fixes the flatpak.rs file.
