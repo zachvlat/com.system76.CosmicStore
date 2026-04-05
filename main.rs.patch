@@ -1,0 +1,39 @@
+diff --git a/src/main.rs b/src/main.rs
+index 3d3fcc2..a17b02f 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -109,6 +109,9 @@ struct Cli {
+     desktop_id: Option<String>,
+     #[arg(long)]
+     startup_notification_id: Option<String>,
++    /// Refresh appstream data from remotes on startup
++    #[arg(long)]
++    refresh: bool,
+ }
+ 
+ /// Runs application with these settings
+@@ -148,6 +151,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
+         config_handler,
+         config,
+         mode: Mode::Normal,
++        refresh: cli.refresh,
+     };
+ 
+     if let Some(codec) = flags
+@@ -264,6 +268,7 @@ pub struct Flags {
+     config_handler: Option<cosmic_config::Config>,
+     config: Config,
+     mode: Mode,
++    refresh: bool,
+ }
+ 
+ //TODO
+@@ -2125,7 +2130,7 @@ impl Application for App {
+             }
+         }
+ 
+-        let command = Task::batch([app.update_title(), app.update_backends(true)]);
++        let command = Task::batch([app.update_title(), app.update_backends(flags.refresh)]);
+         (app, command)
+     }
+ 
