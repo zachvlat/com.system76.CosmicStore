@@ -36,9 +36,10 @@ cp /usr/lib/x86_64-linux-gnu/libdconf.so.1.0.0 lib/
 ln -sf libdconf.so.1.0.0 lib/libdconf.so.1
 
 echo "Fixing problematic libraries..."
-cp /usr/lib/x86_64-linux-gnu/librtmp.so.1 lib/
-cp /usr/lib/x86_64-linux-gnu/libselinux.so.1 lib/
-cp /usr/lib/x86_64-linux-gnu/libssl.so.3 lib/
+rm -f lib/librtmp.so.1 lib/libselinux.so.1 lib/libssl.so.3
+cp -L /usr/lib/x86_64-linux-gnu/librtmp.so.1 lib/ 2>/dev/null || true
+cp -L /usr/lib/x86_64-linux-gnu/libselinux.so.1 lib/ 2>/dev/null || true
+cp -L /usr/lib/x86_64-linux-gnu/libssl.so.3 lib/ 2>/dev/null || true
 
 echo "Building Flatpak..."
 flatpak-builder --user --install-deps-from=flathub --force-clean build-dir com.system76.CosmicStore.json
