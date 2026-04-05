@@ -1,8 +1,8 @@
 {
     "app-id": "com.system76.CosmicStore",
-    "runtime": "org.gnome.Platform",
-    "runtime-version": "49",
-    "sdk": "org.gnome.Sdk",
+    "runtime": "org.freedesktop.Platform",
+    "runtime-version": "24.08",
+    "sdk": "org.freedesktop.Sdk",
     "command": "cosmic-store",
     "finish-args": [
         "--share=ipc",
